@@ -22,8 +22,10 @@ import string
 
 alphabet = list(string.ascii_lowercase)
 
-# CHANGE DIRECTORY FOR YOUR COMPUTER HERE- SWITCH CSV FILE FOR EACH GRADE LEVEL FOR EACH RUN
-df = pd.read_csv('9th.csv')
+# SWITCH CSV FILE FOR EACH GRADE LEVEL FOR EACH RUN
+name_of_file = 'Test11.csv'
+
+df = pd.read_csv(name_of_file)
 
 num_of_attendees = 0
 task = df["First Name: Task on Hand:"].isnull()
@@ -33,15 +35,16 @@ while task[num_of_attendees] != True:
 
 total_members = len(df["Last Name"])
 
+points_added = 5
 
 
 for att in range(num_of_attendees):
     for member in range(total_members):
-        if df.loc[att].at["Last Name: Task on Hand"].lower() == df.loc[member].at["Last Name"].lower():
-            if df.loc[att].at["First Name: Task on Hand:"].lower() == df.loc[member].at["First Name"].lower():
+        if df.loc[att].at["Last Name: Task on Hand"].lower().strip() == df.loc[member].at["Last Name"].lower().strip():
+            if df.loc[att].at["First Name: Task on Hand:"].lower().strip() == df.loc[member].at["First Name"].lower().strip():
                 points = df.loc[member].at["Points"]
-                df.at[member, "Points"] = points + 1
-                #CHANGE CSV FILE NAME HERE TO GRADE LEVEL AS WELL
-                df.to_csv("9th.csv", index=False)
+                df.at[member, "Points"] = points + points_added
+                df.to_csv(name_of_file, index=False)
+                print("y")
 
 print(df)
