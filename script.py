@@ -35,6 +35,7 @@ while task[num_of_attendees] != True:
 
 total_members = len(df["Last Name"])
 
+# EDIT THIS NUMBER TO INDICATE POINTS NEEDED TO ADD
 points_added = 5
 
 
